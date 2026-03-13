@@ -1,6 +1,6 @@
-/* =============================================
+/* ==============================================
    THE FORGOTTEN ROOM — GAME ENGINE
-   ============================================= */
+   ============================================== */
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
 const state = {
@@ -14,12 +14,12 @@ const state = {
 
 // ─── ITEMS ───────────────────────────────────────────────────────────────────
 const ITEMS = {
-  key_small:   { id: 'key_small',   name: 'Brass Key',      icon: '🗝️',  desc: 'A small brass key. Looks like it fits a drawer or a small lock.' },
-  paper_clue:  { id: 'paper_clue',  name: 'Torn Letter',    icon: '📄',  desc: 'A torn piece of paper. It reads: "The code is hidden in plain sight — count the candles, count the roses, count the raven\'s eyes."' },
-  lantern:     { id: 'lantern',     name: 'Lantern',        icon: '🔦',  desc: 'An oil lantern. It can illuminate dark areas.' },
-  crowbar:     { id: 'crowbar',     name: 'Crowbar',        icon: '🔧',  desc: 'A heavy iron crowbar. Could pry open something stuck shut.' },
-  cellar_key:  { id: 'cellar_key',  name: 'Cellar Key',     icon: '🔑',  desc: 'A large iron key. Must unlock something heavy.' },
-  code_page:   { id: 'code_page',   name: 'Cipher Page',    icon: '📋',  desc: 'A page with symbols mapped to numbers: 🕯️=3, 🌹=7, 👁️=2. The final code: 372.' },
+  key_small: { id: 'key_small', name: 'Brass Key', icon: '🗝️', desc: 'A small brass key. Looks like it fits a drawer or a small lock.' },
+  paper_clue: { id: 'paper_clue', name: 'Torn Letter', icon: '📄', desc: 'A torn piece of paper. It reads: "The code is hidden in plain sight — count the candles, count the roses, count the raven\'s eyes."' },
+  lantern: { id: 'lantern', name: 'Lantern', icon: '🔦', desc: 'An oil lantern. It can illuminate dark areas.' },
+  crowbar: { id: 'crowbar', name: 'Crowbar', icon: '🔧', desc: 'A heavy iron crowbar. Could pry open something stuck shut.' },
+  cellar_key: { id: 'cellar_key', name: 'Cellar Key', icon: '🔑', desc: 'A large iron key. Must unlock something heavy.' },
+  code_page: { id: 'code_page', name: 'Cipher Page', icon: '📋', desc: 'A page with symbols mapped to numbers: 🕯️=3, 🌹=7, 👁️=2. The final code: 372.' },
 };
 
 // ─── PUZZLE DEFINITIONS ──────────────────────────────────────────────────────
@@ -406,8 +406,8 @@ function addItem(id) {
 }
 
 function renderSidebar() {
-  const list   = document.getElementById('inv-sidebar-list');
-  const empty  = document.getElementById('inv-sidebar-empty');
+  const list = document.getElementById('inv-sidebar-list');
+  const empty = document.getElementById('inv-sidebar-empty');
   if (!list) return;
 
   // Clear old cards (keep empty placeholder)
@@ -510,7 +510,7 @@ function tryUseItem(targetId) {
 }
 
 // Legacy stubs (kept so any old HTML onclick still works)
-function openInventory() {}
+function openInventory() { }
 function closeInventory() { document.getElementById('inventory-modal')?.classList.add('hidden'); }
 
 
