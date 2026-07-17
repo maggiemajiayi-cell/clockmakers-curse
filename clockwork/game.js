@@ -41,6 +41,66 @@ const ITEMS = {
 // Skeleton — puzzle logic to be designed in next phase
 const PUZZLES = {};
 
+// ─── AUDIO / OPENING CINEMATIC ──────────────────────────────────────────────
+const bgm = document.getElementById('bgm');
+const introVideo = document.getElementById('intro-video');
+const introOverlay = document.getElementById('intro-video-overlay');
+let introWatchdog = null;
+let introActive = false;
+
+if (bgm) bgm.volume = 0.7;
+
+function ensureBgm() {
+  if (!bgm || !bgm.paused) return;
+  bgm.play().catch(() => {
+    // Audible autoplay may be blocked until the visitor interacts with the page.
+  });
+}
+
+function playIntro() {
+  ensureBgm();
+
+  if (!introVideo || !introOverlay) {
+    enterShop();
+    return;
+  }
+
+  introActive = true;
+  introVideo.currentTime = 0;
+  introOverlay.classList.remove('is-hidden');
+  introOverlay.setAttribute('aria-hidden', 'false');
+
+  introVideo.play().catch(() => finishIntro());
+
+  // Never leave the visitor trapped behind a stalled media element.
+  clearTimeout(introWatchdog);
+  introWatchdog = setTimeout(finishIntro, 20000);
+}
+
+function finishIntro() {
+  if (!introActive) return;
+  introActive = false;
+  clearTimeout(introWatchdog);
+  if (introVideo) introVideo.pause();
+  if (introOverlay) {
+    introOverlay.classList.add('is-hidden');
+    introOverlay.setAttribute('aria-hidden', 'true');
+  }
+  enterShop();
+}
+
+if (introVideo) {
+  introVideo.addEventListener('ended', finishIntro);
+  introVideo.addEventListener('error', finishIntro);
+}
+
+// Try immediately, then retry on the first user gesture for browsers that
+// disallow audible autoplay on page load.
+ensureBgm();
+['pointerdown', 'keydown', 'touchstart'].forEach(eventName => {
+  document.addEventListener(eventName, ensureBgm);
+});
+
 // ─── SCREEN TRANSITIONS ──────────────────────────────────────────────────────
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));

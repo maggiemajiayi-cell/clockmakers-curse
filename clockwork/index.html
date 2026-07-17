@@ -5,9 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Clockmaker's Curse — Escape Game</title>
   <meta name="description" content="You wake on a gearwork table. The pendulum swings above you. Escape before time stops — forever." />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
+
+  <!-- Global soundtrack: browsers that block audible autoplay will start it
+       on the visitor's first interaction instead. -->
+  <audio id="bgm" src="sound1-browser.wav?v=3" autoplay loop preload="auto"></audio>
+
+  <!-- Opening cinematic shown after the player enters the shop. -->
+  <div id="intro-video-overlay" class="intro-video-overlay is-hidden" aria-hidden="true">
+    <video id="intro-video" src="mpstart.mp4?v=3" preload="auto" playsinline muted></video>
+    <button class="intro-skip" type="button" onclick="finishIntro()">SKIP ›</button>
+  </div>
 
   <!-- ========== LANDING SCREEN ========== -->
   <div id="landing-screen" class="screen active">
@@ -63,7 +73,7 @@
         <em>Something here is waiting to be wound up.</em>
       </p>
 
-      <button id="start-btn" class="btn-primary" onclick="enterShop()">
+      <button id="start-btn" class="btn-primary" onclick="playIntro()">
         <span>⚙ &nbsp; ENTER THE SHOP</span>
       </button>
 
@@ -308,6 +318,6 @@
     </div>
   </div>
 
-  <script src="game.js"></script>
+  <script src="game.js?v=3"></script>
 </body>
 </html>

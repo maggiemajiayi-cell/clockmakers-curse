@@ -31,6 +31,37 @@ html, body {
   color: var(--text);
 }
 
+/* ─── OPENING CINEMATIC ─────────────────────────────────────────────────────── */
+.intro-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+.intro-video-overlay.is-hidden { display: none; }
+.intro-video-overlay video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+.intro-skip {
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  padding: 9px 14px;
+  border: 1px solid rgba(232, 184, 64, 0.55);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.62);
+  color: var(--brass-light);
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
 /* ─── SCREENS ────────────────────────────────────────────────────────────────── */
 .screen {
   position: absolute; inset: 0;
