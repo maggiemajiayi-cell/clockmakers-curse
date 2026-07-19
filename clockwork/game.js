@@ -81,7 +81,7 @@ function setVolume(level, resumePlayback = true) {
     mark.setAttribute('aria-pressed', String(active));
   });
 
-  try { localStorage.setItem('clockwork-volume', String(safeLevel)); } catch (_) {}
+  try { localStorage.setItem('clockwork-volume-v2', String(safeLevel)); } catch (_) {}
   if (resumePlayback && safeLevel > 0) ensureBgm();
 }
 
@@ -116,9 +116,9 @@ document.addEventListener('click', event => {
   if (volumeControl && !volumeControl.contains(event.target)) closeVolumePanel();
 });
 
-let initialVolume = 75;
+let initialVolume = 25;
 try {
-  const savedVolume = localStorage.getItem('clockwork-volume');
+  const savedVolume = localStorage.getItem('clockwork-volume-v2');
   if (savedVolume !== null) initialVolume = Number(savedVolume);
 } catch (_) {}
 setVolume(initialVolume, false);

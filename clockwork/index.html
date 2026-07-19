@@ -5,37 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Clockmaker's Curse — Escape Game</title>
   <meta name="description" content="You wake on a gearwork table. The pendulum swings above you. Escape before time stops — forever." />
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 
   <!-- Global soundtrack: browsers that block audible autoplay will start it
        on the visitor's first interaction instead. -->
   <audio id="bgm" src="sound1-browser.wav?v=3" autoplay loop preload="auto"></audio>
-
-  <!-- Global volume control -->
-  <div id="volume-control" class="volume-control">
-    <button id="volume-toggle" class="volume-toggle" type="button"
-      aria-label="Adjust volume" aria-expanded="false" aria-controls="volume-panel">
-      <span id="volume-icon" class="volume-icon" data-level="75" aria-hidden="true">
-        <svg viewBox="0 0 32 32" focusable="false">
-          <path class="speaker-cone" d="M6.5 13h4.2l5.8-5v16l-5.8-5H6.5z" />
-          <path class="sound-wave wave-one" d="M20 12.2c1.2 1 1.8 2.2 1.8 3.8S21.2 18.8 20 19.8" />
-          <path class="sound-wave wave-two" d="M23.1 9.2c2.1 1.8 3.1 4 3.1 6.8s-1 5-3.1 6.8" />
-          <path class="sound-wave wave-three" d="M26 6.8c3 2.5 4.5 5.6 4.5 9.2S29 22.7 26 25.2" />
-          <path class="mute-slash" d="M7 7l18 18" />
-        </svg>
-      </span>
-    </button>
-    <div id="volume-panel" class="volume-panel is-hidden" role="group" aria-label="BGM volume">
-      <div class="volume-scale" aria-hidden="true"></div>
-      <button class="volume-mark" type="button" data-volume="0" aria-label="Volume 0 percent"><span></span><b>0</b></button>
-      <button class="volume-mark" type="button" data-volume="25" aria-label="Volume 25 percent"><span></span><b>25</b></button>
-      <button class="volume-mark" type="button" data-volume="50" aria-label="Volume 50 percent"><span></span><b>50</b></button>
-      <button class="volume-mark" type="button" data-volume="75" aria-label="Volume 75 percent"><span></span><b>75</b></button>
-      <button class="volume-mark" type="button" data-volume="100" aria-label="Volume 100 percent"><span></span><b>100</b></button>
-    </div>
-  </div>
 
   <!-- Opening cinematic shown after the player enters the shop. -->
   <div id="intro-video-overlay" class="intro-video-overlay is-hidden" aria-hidden="true">
@@ -116,6 +92,28 @@
       </div>
       <div class="hud-center"></div>
       <div class="hud-right">
+        <div id="volume-control" class="volume-control">
+          <button id="volume-toggle" class="volume-toggle" type="button"
+            aria-label="Adjust volume" aria-expanded="false" aria-controls="volume-panel">
+            <span id="volume-icon" class="volume-icon" data-level="25" aria-hidden="true">
+              <svg viewBox="0 0 32 32" focusable="false">
+                <path class="speaker-cone" d="M6.5 13h4.2l5.8-5v16l-5.8-5H6.5z" />
+                <path class="sound-wave wave-one" d="M20 12.2c1.2 1 1.8 2.2 1.8 3.8S21.2 18.8 20 19.8" />
+                <path class="sound-wave wave-two" d="M23.1 9.2c2.1 1.8 3.1 4 3.1 6.8s-1 5-3.1 6.8" />
+                <path class="sound-wave wave-three" d="M26 6.8c3 2.5 4.5 5.6 4.5 9.2S29 22.7 26 25.2" />
+                <path class="mute-slash" d="M7 7l18 18" />
+              </svg>
+            </span>
+          </button>
+          <div id="volume-panel" class="volume-panel is-hidden" role="group" aria-label="BGM volume">
+            <div class="volume-scale" aria-hidden="true"></div>
+            <button class="volume-mark" type="button" data-volume="0" aria-label="Volume 0 percent"><span></span><b>0</b></button>
+            <button class="volume-mark" type="button" data-volume="25" aria-label="Volume 25 percent"><span></span><b>25</b></button>
+            <button class="volume-mark" type="button" data-volume="50" aria-label="Volume 50 percent"><span></span><b>50</b></button>
+            <button class="volume-mark" type="button" data-volume="75" aria-label="Volume 75 percent"><span></span><b>75</b></button>
+            <button class="volume-mark" type="button" data-volume="100" aria-label="Volume 100 percent"><span></span><b>100</b></button>
+          </div>
+        </div>
         <button class="hud-btn" onclick="openNotes()">📋 &nbsp;JOURNAL</button>
       </div>
     </div>
@@ -341,6 +339,6 @@
     </div>
   </div>
 
-  <script src="game.js?v=7"></script>
+  <script src="game.js?v=8"></script>
 </body>
 </html>
