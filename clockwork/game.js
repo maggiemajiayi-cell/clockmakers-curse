@@ -45,10 +45,15 @@ const PUZZLES = {};
 const bgm = document.getElementById('bgm');
 const introVideo = document.getElementById('intro-video');
 const introOverlay = document.getElementById('intro-video-overlay');
+const volumeControl = document.getElementById('volume-control');
+const volumeToggle = document.getElementById('volume-toggle');
+const volumePanel = document.getElementById('volume-panel');
+const volumeIcon = document.getElementById('volume-icon');
+const volumeMarks = document.querySelectorAll('.volume-mark');
 let introWatchdog = null;
 let introActive = false;
-
-if (bgm) bgm.volume = 0.7;
+const INTRO_END_EARLY_SECONDS = 0.45;
+const INTRO_MAX_WAIT_MS = 16000;
 
 function ensureBgm() {
   if (!bgm || !bgm.paused) return;
@@ -56,6 +61,67 @@ function ensureBgm() {
     // Audible autoplay may be blocked until the visitor interacts with the page.
   });
 }
+
+function setVolume(level, resumePlayback = true) {
+  const safeLevel = [0, 25, 50, 75, 100].includes(level) ? level : 75;
+
+  if (bgm) {
+    bgm.volume = safeLevel / 100;
+    bgm.muted = safeLevel === 0;
+  }
+
+  if (volumeIcon) {
+    volumeIcon.dataset.level = String(safeLevel);
+  }
+  if (volumeToggle) volumeToggle.setAttribute('aria-label', `Adjust volume, currently ${safeLevel} percent`);
+
+  volumeMarks.forEach(mark => {
+    const active = Number(mark.dataset.volume) === safeLevel;
+    mark.classList.toggle('active', active);
+    mark.setAttribute('aria-pressed', String(active));
+  });
+
+  try { localStorage.setItem('clockwork-volume', String(safeLevel)); } catch (_) {}
+  if (resumePlayback && safeLevel > 0) ensureBgm();
+}
+
+function toggleVolumePanel() {
+  if (!volumePanel || !volumeToggle) return;
+  const willOpen = volumePanel.classList.contains('is-hidden');
+  volumePanel.classList.toggle('is-hidden', !willOpen);
+  volumeToggle.setAttribute('aria-expanded', String(willOpen));
+}
+
+function closeVolumePanel() {
+  if (!volumePanel || !volumeToggle) return;
+  volumePanel.classList.add('is-hidden');
+  volumeToggle.setAttribute('aria-expanded', 'false');
+}
+
+if (volumeToggle) {
+  volumeToggle.addEventListener('click', event => {
+    event.stopPropagation();
+    toggleVolumePanel();
+  });
+}
+
+volumeMarks.forEach(mark => {
+  mark.addEventListener('click', event => {
+    event.stopPropagation();
+    setVolume(Number(mark.dataset.volume));
+  });
+});
+
+document.addEventListener('click', event => {
+  if (volumeControl && !volumeControl.contains(event.target)) closeVolumePanel();
+});
+
+let initialVolume = 75;
+try {
+  const savedVolume = localStorage.getItem('clockwork-volume');
+  if (savedVolume !== null) initialVolume = Number(savedVolume);
+} catch (_) {}
+setVolume(initialVolume, false);
 
 function playIntro() {
   ensureBgm();
@@ -74,7 +140,7 @@ function playIntro() {
 
   // Never leave the visitor trapped behind a stalled media element.
   clearTimeout(introWatchdog);
-  introWatchdog = setTimeout(finishIntro, 20000);
+  introWatchdog = setTimeout(finishIntro, INTRO_MAX_WAIT_MS);
 }
 
 function finishIntro() {
@@ -92,6 +158,15 @@ function finishIntro() {
 if (introVideo) {
   introVideo.addEventListener('ended', finishIntro);
   introVideo.addEventListener('error', finishIntro);
+  introVideo.addEventListener('timeupdate', () => {
+    if (
+      introActive &&
+      Number.isFinite(introVideo.duration) &&
+      introVideo.duration - introVideo.currentTime <= INTRO_END_EARLY_SECONDS
+    ) {
+      finishIntro();
+    }
+  });
 }
 
 // Try immediately, then retry on the first user gesture for browsers that
@@ -269,7 +344,7 @@ function triggerEnd() {
 
 // ─── KEYBOARD ─────────────────────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closePuzzle(); closeNotes(); closeDialogue(); cancelUse(); }
+  if (e.key === 'Escape') { closePuzzle(); closeNotes(); closeDialogue(); closeVolumePanel(); cancelUse(); }
   if (e.key === 'j' || e.key === 'J') openNotes();
 });
 
