@@ -52,7 +52,7 @@ const volumeIcon = document.getElementById('volume-icon');
 const volumeMarks = document.querySelectorAll('.volume-mark');
 let introWatchdog = null;
 let introActive = false;
-const INTRO_END_EARLY_SECONDS = 0.45;
+const INTRO_END_EARLY_SECONDS = 0.9;
 const INTRO_MAX_WAIT_MS = 16000;
 
 function ensureBgm() {
