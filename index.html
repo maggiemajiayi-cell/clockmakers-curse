@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Forgotten Room – Escape Game</title>
-  <meta name="description" content="Can you escape the forgotten room? Solve puzzles, find clues, and unlock freedom in this immersive browser escape room game." />
+  <meta name="description"
+    content="Can you escape the forgotten room? Solve puzzles, find clues, and unlock freedom in this immersive browser escape room game." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- ========== LANDING SCREEN ========== -->
@@ -17,14 +22,21 @@
     <div class="particles" id="particles"></div>
     <div class="landing-content">
       <div class="candles-top">
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
+        <div class="candle">
+          <div class="flame"></div>
+        </div>
       </div>
       <div class="title-block">
         <p class="subtitle-top">— An Immersive Experience —</p>
         <h1 class="game-title">THE FORGOTTEN ROOM</h1>
-        <p class="tagline">You wake up in a dark, locked room.<br/>Memories are fractured. The door won't open.<br/><em>Find a way out before midnight strikes.</em></p>
+        <p class="tagline">You wake up in a dark, locked room.<br />Memories are fractured. The door won't
+          open.<br /><em>Find a way out before midnight strikes.</em></p>
       </div>
       <button id="start-btn" class="btn-primary" onclick="startGame()">
         <span class="btn-glow"></span>
@@ -32,8 +44,12 @@
       </button>
       <p class="hint-text">🔊 Best played with headphones &nbsp;|&nbsp; 🖥️ Desktop recommended</p>
       <div class="candles-bottom">
-        <div class="candle small"><div class="flame"></div></div>
-        <div class="candle small"><div class="flame"></div></div>
+        <div class="candle small">
+          <div class="flame"></div>
+        </div>
+        <div class="candle small">
+          <div class="flame"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,445 +71,468 @@
 
     <!-- MAIN AREA: room + sidebar -->
     <div class="game-body">
-    <div class="room-viewport">
+      <div class="room-viewport">
 
-      <!-- ROOM 1: THE STUDY -->
-      <div id="room-study" class="room active-room">
+        <!-- ROOM 1: THE STUDY -->
+        <div id="room-study" class="room active-room">
 
-        <!-- SVG Room Scene -->
-        <svg class="room-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <radialGradient id="lampGlow" cx="64%" cy="45%" r="45%">
-              <stop offset="0%" stop-color="#ffa020" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+          <!-- SVG Room Scene -->
+          <svg class="room-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="lampGlow" cx="64%" cy="45%" r="45%">
+                <stop offset="0%" stop-color="#ffa020" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#000" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="ambLeft" cx="8%" cy="55%" r="30%">
+                <stop offset="0%" stop-color="#b06018" stop-opacity="0.2" />
+                <stop offset="100%" stop-color="#000" stop-opacity="0" />
+              </radialGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="shadow">
+                <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.7" />
+              </filter>
+              <linearGradient id="wallGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#2d1508" />
+                <stop offset="30%" stop-color="#3e1e0a" />
+                <stop offset="60%" stop-color="#4a240c" />
+                <stop offset="100%" stop-color="#2a1407" />
+              </linearGradient>
+              <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#4a2a0a" />
+                <stop offset="60%" stop-color="#2a1404" />
+                <stop offset="100%" stop-color="#1a0c02" />
+              </linearGradient>
+              <linearGradient id="shelfGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#3a2010" />
+                <stop offset="40%" stop-color="#5a3518" />
+                <stop offset="100%" stop-color="#3a2010" />
+              </linearGradient>
+              <linearGradient id="doorGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#4a2a0e" />
+                <stop offset="15%" stop-color="#6a4018" />
+                <stop offset="50%" stop-color="#7a5020" />
+                <stop offset="85%" stop-color="#6a4018" />
+                <stop offset="100%" stop-color="#4a2a0e" />
+              </linearGradient>
+              <pattern id="floorBoards" patternUnits="userSpaceOnUse" width="80" height="600">
+                <rect width="80" height="600" fill="none" />
+                <line x1="80" y1="0" x2="80" y2="600" stroke="#1a0c02" stroke-width="2" opacity="0.5" />
+              </pattern>
+              <pattern id="woodGrain" patternUnits="userSpaceOnUse" width="40" height="200">
+                <rect width="40" height="200" fill="none" />
+                <line x1="0" y1="0" x2="40" y2="200" stroke="#000" stroke-width="0.5" opacity="0.06" />
+              </pattern>
+            </defs>
+
+            <!-- Wall -->
+            <rect width="1000" height="600" fill="url(#wallGrad)" />
+            <!-- Wood grain on wall -->
+            <rect width="1000" height="600" fill="url(#woodGrain)" opacity="0.5" />
+
+            <!-- Wainscoting (wall paneling lower third) -->
+            <rect x="0" y="400" width="1000" height="3" fill="#6a4a1a" opacity="0.4" />
+            <rect x="0" y="403" width="1000" height="170" fill="#1a0c06" opacity="0.3" />
+
+            <!-- Floor -->
+            <rect x="0" y="430" width="1000" height="170" fill="url(#floorGrad)" />
+            <rect x="0" y="430" width="1000" height="170" fill="url(#floorBoards)" opacity="0.8" />
+
+            <!-- Ceiling dark band -->
+            <rect x="0" y="0" width="1000" height="50" fill="#0a0503" opacity="0.8" />
+
+            <!-- Cornice -->
+            <rect x="0" y="48" width="1000" height="6" fill="#5a3a18" opacity="0.5" />
+
+            <!-- Lamp glow -->
+            <rect width="1000" height="600" fill="url(#lampGlow)" />
+            <rect width="1000" height="600" fill="url(#ambLeft)" />
+
+            <!-- ════ BOOKSHELF (left) ════ -->
+            <g id="svgBookshelf" filter="url(#shadow)">
+              <!-- Main body -->
+              <rect x="20" y="55" width="155" height="375" fill="url(#shelfGrad)" rx="2" />
+              <rect x="21" y="56" width="153" height="373" fill="none" stroke="#7a4a20" stroke-width="2" rx="1" />
+              <!-- Shelves horizontal -->
+              <rect x="20" y="145" width="155" height="8" fill="#6a4018" />
+              <rect x="20" y="235" width="155" height="8" fill="#6a4018" />
+              <rect x="20" y="325" width="155" height="8" fill="#6a4018" />
+              <!-- Books on shelves (colorful) -->
+              <!-- shelf 1 books -->
+              <rect x="30" y="65" width="18" height="77" fill="#8b1a1a" rx="1" />
+              <rect x="50" y="72" width="14" height="70" fill="#1a4a8b" rx="1" />
+              <rect x="66" y="60" width="20" height="82" fill="#2a7a2a" rx="1" />
+              <rect x="88" y="68" width="16" height="74" fill="#8b6a1a" rx="1" />
+              <rect x="106" y="63" width="22" height="79" fill="#6a1a6a" rx="1" />
+              <rect x="130" y="70" width="15" height="72" fill="#1a6a6a" rx="1" />
+              <rect x="147" y="65" width="18" height="77" fill="#7a4a1a" rx="1" />
+              <!-- shelf 2 books -->
+              <rect x="30" y="155" width="15" height="75" fill="#6a1a1a" rx="1" />
+              <rect x="47" y="160" width="20" height="70" fill="#2a5a8b" rx="1" />
+              <rect x="69" y="153" width="17" height="77" fill="#1a5a2a" rx="1" />
+              <rect x="88" y="158" width="14" height="72" fill="#9a7a1a" rx="1" />
+              <rect x="104" y="155" width="19" height="75" fill="#7a2a7a" rx="1" />
+              <rect x="125" y="160" width="16" height="70" fill="#2a7a7a" rx="1" />
+              <rect x="143" y="154" width="21" height="76" fill="#8a5a2a" rx="1" />
+              <!-- shelf 3 books -->
+              <rect x="30" y="245" width="22" height="74" fill="#9a1a1a" rx="1" />
+              <rect x="54" y="248" width="15" height="71" fill="#1a3a7a" rx="1" />
+              <rect x="71" y="244" width="18" height="75" fill="#3a8a3a" rx="1" />
+              <rect x="91" y="249" width="16" height="70" fill="#7a5a1a" rx="1" />
+              <rect x="109" y="245" width="20" height="74" fill="#5a1a5a" rx="1" />
+              <rect x="131" y="247" width="17" height="72" fill="#1a5a5a" rx="1" />
+              <rect x="150" y="244" width="15" height="75" fill="#6a3a1a" rx="1" />
+              <!-- Secret compartment (subtle glow hint) -->
+              <rect x="20" y="333" width="155" height="90" fill="#2a1a08" opacity="0.5" />
+              <rect x="25" y="338" width="145" height="80" fill="none" stroke="rgba(212,168,83,0.1)" stroke-width="1"
+                rx="1" />
+            </g>
+
+            <!-- ════ PAINTING (upper right) ════ -->
+            <g id="svgPainting" filter="url(#shadow)">
+              <!-- Gold frame -->
+              <rect x="648" y="40" width="145" height="165" fill="#6a4a1a" rx="2" />
+              <rect x="658" y="50" width="125" height="145" fill="#5a3a12" />
+              <!-- Painting interior: moonlit graveyard -->
+              <rect x="658" y="50" width="125" height="145" fill="#0e1520" />
+              <!-- Moon -->
+              <circle cx="720" cy="80" r="18" fill="#d4d0b0" opacity="0.9" />
+              <circle cx="728" cy="76" r="16" fill="#1a2030" opacity="0.6" /><!-- shadow -->
+              <!-- Clouds -->
+              <ellipse cx="700" cy="70" rx="22" ry="8" fill="#2a3040" opacity="0.7" />
+              <ellipse cx="740" cy="65" rx="18" ry="7" fill="#2a3040" opacity="0.6" />
+              <!-- Ground (grass/graves) -->
+              <rect x="658" y="150" width="125" height="45" fill="#0a0f08" opacity="0.8" />
+              <!-- Gravestones -->
+              <rect x="675" y="130" width="12" height="20" fill="#3a3a3a" rx="2" />
+              <rect x="679" y="125" width="4" height="8" fill="#3a3a3a" />
+              <rect x="700" y="125" width="14" height="25" fill="#4a4a4a" rx="2" />
+              <rect x="725" y="132" width="10" height="18" fill="#3a3a3a" rx="2" />
+              <!-- Rose bushes (small dots) -->
+              <circle cx="687" cy="152" r="3" fill="#8b0000" opacity="0.8" />
+              <circle cx="693" cy="150" r="3" fill="#8b0000" opacity="0.8" />
+              <circle cx="710" cy="153" r="3" fill="#8b0000" opacity="0.8" />
+              <circle cx="717" cy="151" r="3" fill="#8b0000" opacity="0.8" />
+              <circle cx="730" cy="152" r="3" fill="#8b0000" opacity="0.8" />
+              <circle cx="737" cy="150" r="3" fill="#8b0000" opacity="0.8" />
+              <circle cx="750" cy="153" r="3" fill="#8b0000" opacity="0.8" />
+              <!-- Raven perched on gravestone -->
+              <ellipse cx="703" cy="120" rx="7" ry="5" fill="#111" />
+              <ellipse cx="707" cy="118" rx="4" ry="3" fill="#111" />
+              <!-- Raven eyes -->
+              <circle cx="709" cy="117" r="1.5" fill="#ff3300" />
+              <!-- Candles in painting (3) -->
+              <rect x="665" y="140" width="4" height="12" fill="#f5f0e0" opacity="0.9" />
+              <circle cx="667" cy="139" r="2" fill="#ffa020" opacity="0.9" filter="url(#glow)" />
+              <rect x="760" y="137" width="4" height="15" fill="#f5f0e0" opacity="0.9" />
+              <circle cx="762" cy="136" r="2" fill="#ffa020" opacity="0.9" filter="url(#glow)" />
+              <rect x="776" y="142" width="4" height="10" fill="#f5f0e0" opacity="0.9" />
+              <circle cx="778" cy="141" r="2" fill="#ffa020" opacity="0.9" filter="url(#glow)" />
+              <!-- Frame decorations -->
+              <rect x="648" y="40" width="145" height="165" fill="none" stroke="#a07830" stroke-width="2" rx="2" />
+            </g>
+
+            <!-- ════ DESK (center) ════ -->
+            <g id="svgDesk" filter="url(#shadow)">
+              <!-- Desk top surface -->
+              <rect x="355" y="305" width="265" height="18" fill="#8a5520" rx="2" />
+              <rect x="355" y="322" width="265" height="3" fill="#a07030" opacity="0.6" />
+              <!-- Desk body -->
+              <rect x="355" y="325" width="265" height="95" fill="#5a3210" />
+              <!-- Central drawer (locked) -->
+              <rect x="455" y="340" width="80" height="50" fill="#4a2a0e" />
+              <rect x="456" y="341" width="78" height="48" fill="none" stroke="#7a5020" stroke-width="1.5" />
+              <!-- Lock on drawer -->
+              <circle cx="495" cy="365" r="6" fill="#888" stroke="#666" stroke-width="1.5" />
+              <rect x="491" y="368" width="8" height="6" fill="#777" rx="1" />
+              <!-- Items on desk -->
+              <!-- Candle holder -->
+              <rect x="580" y="295" width="6" height="12" fill="#f0ebe0" opacity="0.95" />
+              <circle cx="583" cy="294" r="3" fill="#ffc030" filter="url(#glow)" />
+              <!-- Open journal -->
+              <rect x="390" y="299" width="55" height="8" fill="#d4c9a8" rx="1" opacity="0.9" />
+              <!-- Ink bottle -->
+              <rect x="450" y="300" width="12" height="7" fill="#1a1a6a" rx="1" opacity="0.9" />
+              <!-- Desk legs -->
+              <rect x="360" y="420" width="14" height="10" fill="#3a2008" />
+              <rect x="600" y="420" width="14" height="10" fill="#3a2008" />
+            </g>
+
+            <!-- ════ SAFE (left wall) ════ -->
+            <g id="svgSafe" filter="url(#shadow)">
+              <rect x="190" y="208" width="130" height="120" fill="#2e2e2e" rx="4" />
+              <rect x="192" y="210" width="126" height="116" fill="#333" rx="3" />
+              <!-- Safe door outline -->
+              <rect x="196" y="214" width="118" height="108" fill="#3a3a3a" rx="2" />
+              <!-- Combination dial -->
+              <circle cx="255" cy="268" r="28" fill="#555" stroke="#777" stroke-width="2" />
+              <circle cx="255" cy="268" r="22" fill="#444" stroke="#666" stroke-width="1" />
+              <circle cx="255" cy="268" r="4" fill="#888" />
+              <!-- Dial markings -->
+              <line x1="255" y1="242" x2="255" y2="248" stroke="#999" stroke-width="2" />
+              <line x1="255" y1="288" x2="255" y2="294" stroke="#999" stroke-width="2" />
+              <line x1="229" y1="268" x2="235" y2="268" stroke="#999" stroke-width="2" />
+              <line x1="275" y1="268" x2="281" y2="268" stroke="#999" stroke-width="2" />
+              <!-- Engraving above dial -->
+              <text x="255" y="300" text-anchor="middle" font-size="11" fill="#d4a853" opacity="0.8"
+                font-family="serif">🕯️🌹👁️</text>
+              <!-- Handle knob -->
+              <rect x="302" y="250" width="10" height="36" fill="#666" rx="2" />
+              <rect x="304" y="249" width="6" height="38" fill="#777" rx="1" />
+            </g>
+
+            <!-- ════ LAMP (right center) ════ -->
+            <g id="svgLamp" filter="url(#glow)">
+              <!-- Lamp glow effect -->
+              <ellipse cx="602" cy="275" rx="55" ry="70" fill="#ff9010" opacity="0.15" />
+              <!-- Lamp shade -->
+              <path d="M570,250 L635,250 L620,290 L582,290 Z" fill="#c8980a" />
+              <path d="M570,250 L635,250 L620,290 L582,290 Z" fill="none" stroke="#e8b020" stroke-width="2" />
+              <!-- Lamp body -->
+              <rect x="597" y="290" width="10" height="55" fill="#8a6a20" />
+              <!-- Lamp bulb glow (inside shade) -->
+              <ellipse cx="602" cy="265" rx="12" ry="8" fill="#fff9e0" opacity="0.8" />
+              <!-- Base -->
+              <ellipse cx="602" cy="346" rx="20" ry="6" fill="#7a5a18" />
+            </g>
+
+            <!-- ════ DOOR (right) ════ -->
+            <g id="svgDoor" filter="url(#shadow)">
+              <!-- Door frame -->
+              <rect x="790" y="65" width="135" height="400" fill="#3a2010" rx="3" />
+              <!-- Door panel -->
+              <rect x="797" y="70" width="121" height="392" fill="url(#doorGrad)" rx="2" />
+              <!-- Door panels (decorative) -->
+              <rect x="807" y="85" width="101" height="90" fill="none" stroke="#9a6a28" stroke-width="2" rx="2"
+                opacity="0.6" />
+              <rect x="807" y="185" width="101" height="100" fill="none" stroke="#9a6a28" stroke-width="2" rx="2"
+                opacity="0.6" />
+              <rect x="807" y="295" width="101" height="90" fill="none" stroke="#9a6a28" stroke-width="2" rx="2"
+                opacity="0.6" />
+              <!-- Door knob -->
+              <circle cx="802" cy="275" r="8" fill="#c8a030" stroke="#a08020" stroke-width="1.5" />
+              <circle cx="802" cy="275" r="4" fill="#e8c040" />
+              <!-- Lock plate -->
+              <rect x="796" y="267" width="12" height="16" fill="#9a8020" rx="1" />
+              <ellipse cx="802" cy="278" rx="3" ry="4" fill="#2a2a2a" opacity="0.8" />
+              <!-- Padlock hanging -->
+              <rect x="797" y="410" width="16" height="12" fill="#888" rx="3" />
+              <path d="M800,410 Q800,403 805,403 Q810,403 810,410" fill="none" stroke="#888" stroke-width="3" />
+              <!-- Shadow at base -->
+              <rect x="790" y="460" width="135" height="5" fill="#000" opacity="0.4" />
+            </g>
+
+            <!-- Final vignette overlay -->
+            <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+              <stop offset="50%" stop-color="transparent" />
+              <stop offset="100%" stop-color="#000" stop-opacity="0.5" />
             </radialGradient>
-            <radialGradient id="ambLeft" cx="8%" cy="55%" r="30%">
-              <stop offset="0%" stop-color="#b06018" stop-opacity="0.2"/>
-              <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+            <rect width="1000" height="600" fill="url(#vignette)" />
+          </svg>
+
+          <!-- Clickable hot zones (invisible overlays) -->
+          <div class="obj" id="obj-desk" style="left:36%;top:50%;width:27%;height:30%" onclick="interact('desk')"
+            title="Examine the desk"></div>
+          <div class="obj" id="obj-bookshelf" style="left:1%;top:8%;width:17%;height:73%"
+            onclick="interact('bookshelf')" title="Browse the bookshelf"></div>
+          <div class="obj" id="obj-painting" style="left:63%;top:5%;width:16%;height:37%" onclick="interact('painting')"
+            title="Look at the painting"></div>
+          <div class="obj" id="obj-safe" style="left:18%;top:33%;width:16%;height:25%" onclick="interact('safe')"
+            title="Examine the wall safe"></div>
+          <div class="obj" id="obj-door" style="left:78%;top:10%;width:16%;height:78%" onclick="interact('door')"
+            title="Try the door"></div>
+          <div class="obj" id="obj-lamp" style="left:56%;top:39%;width:8%;height:30%" onclick="interact('lamp')"
+            title="Look at the lamp"></div>
+
+          <!-- Room labels -->
+          <div class="room-labels">
+            <span class="rl" style="left:50%;top:82%">Desk</span>
+            <span class="rl" style="left:9%;top:87%">Bookshelf</span>
+            <span class="rl" style="left:72%;top:44%">Painting</span>
+            <span class="rl" style="left:27%;top:62%">Safe</span>
+            <span class="rl" style="left:86%;top:92%">Door</span>
+            <span class="rl" style="left:61%;top:73%">Lamp</span>
+          </div>
+        </div>
+
+        <!-- ROOM 2: THE CELLAR -->
+        <div id="room-cellar" class="room">
+
+          <svg class="room-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="cellarWall" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0a0808" />
+                <stop offset="50%" stop-color="#181210" />
+                <stop offset="100%" stop-color="#0e0804" />
+              </linearGradient>
+              <linearGradient id="cellarFloor" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#2a1a08" />
+                <stop offset="100%" stop-color="#0e0804" />
+              </linearGradient>
+              <radialGradient id="lanternGlow" cx="38%" cy="65%" r="40%">
+                <stop offset="0%" stop-color="#ff9010" stop-opacity="0.3" />
+                <stop offset="100%" stop-color="#000" stop-opacity="0" />
+              </radialGradient>
+              <pattern id="stonePat" patternUnits="userSpaceOnUse" width="80" height="50">
+                <rect width="80" height="50" fill="none" />
+                <rect x="0" y="0" width="79" height="24" fill="none" stroke="#090706" stroke-width="2" rx="1" />
+                <rect x="40" y="25" width="79" height="24" fill="none" stroke="#090706" stroke-width="2" rx="1" />
+              </pattern>
+            </defs>
+
+            <!-- Walls -->
+            <rect width="1000" height="600" fill="url(#cellarWall)" />
+            <rect width="1000" height="430" fill="url(#stonePat)" opacity="0.5" />
+
+            <!-- Seepage/moisture on wall -->
+            <rect x="200" y="50" width="15" height="120" fill="#0a1510" opacity="0.4" rx="8" />
+            <rect x="700" y="80" width="10" height="90" fill="#0a1510" opacity="0.3" rx="5" />
+
+            <!-- Floor -->
+            <rect x="0" y="430" width="1000" height="170" fill="url(#cellarFloor)" />
+            <line x1="0" y1="430" x2="1000" y2="430" stroke="#3a2010" stroke-width="3" />
+            <rect x="0" y="430" width="1000" height="170" fill="url(#stonePat)" opacity="0.3" />
+
+            <!-- Ceiling arch -->
+            <path d="M0 0 L0 80 Q500,-30 1000,80 L1000 0 Z" fill="#060404" />
+
+            <!-- Lantern glow -->
+            <rect width="1000" height="600" fill="url(#lanternGlow)" />
+
+            <!-- ════ WALL WRITING (upper right) ════ -->
+            <g id="svgWallCode">
+              <rect x="700" y="80" width="160" height="180" fill="#161008" rx="3" />
+              <rect x="703" y="83" width="154" height="174" fill="none" stroke="#3a2a10" stroke-width="1.5" rx="2" />
+              <!-- Scratched roman numerals -->
+              <text x="720" y="130" font-size="22" fill="#8a7040" font-family="serif" opacity="0.9">I VIII</text>
+              <text x="720" y="165" font-size="22" fill="#8a7040" font-family="serif" opacity="0.9">IV VII</text>
+              <text x="710" y="210" font-size="11" fill="#5a4a30" font-family="monospace" opacity="0.7">= ? ? ? ?</text>
+            </g>
+
+            <!-- ════ BARREL (left) ════ -->
+            <g id="svgBarrel" filter="url(#shadow)">
+              <!-- Main barrel -->
+              <rect x="80" y="270" width="140" height="165" fill="#5a3818" rx="30" />
+              <!-- Metal bands -->
+              <rect x="80" y="300" width="140" height="10" fill="#7a5a28" rx="2" />
+              <rect x="80" y="350" width="140" height="10" fill="#7a5a28" rx="2" />
+              <rect x="80" y="400" width="140" height="10" fill="#7a5a28" rx="2" />
+              <!-- Barrel top -->
+              <ellipse cx="150" cy="275" rx="70" ry="12" fill="#6a4a20" />
+              <ellipse cx="150" cy="272" rx="60" ry="9" fill="#4a3010" />
+              <!-- Bung -->
+              <circle cx="150" cy="272" r="8" fill="#3a2a10" stroke="#5a3a18" stroke-width="1.5" />
+            </g>
+
+            <!-- ════ TOOLBOX (right center) ════ -->
+            <g id="svgToolbox" filter="url(#shadow)">
+              <rect x="588" y="360" width="170" height="75" fill="#6a4018" rx="3" />
+              <!-- Lid -->
+              <rect x="588" y="355" width="170" height="20" fill="#8a5a20" rx="3" />
+              <!-- Latch -->
+              <rect x="660" y="357" width="26" height="10" fill="#aaa" rx="2" />
+              <rect x="666" y="356" width="14" height="12" fill="none" stroke="#999" stroke-width="1.5" />
+              <!-- Handle -->
+              <path d="M640,360 Q673,345 706,360" fill="none" stroke="#9a7030" stroke-width="4"
+                stroke-linecap="round" />
+              <!-- Tools visible in open crack -->
+              <rect x="600" y="363" width="8" height="14" fill="#888" rx="1" />
+              <rect x="614" y="360" width="6" height="17" fill="#666" rx="1" />
+              <rect x="625" y="364" width="10" height="12" fill="#c8780a" rx="1" />
+            </g>
+
+            <!-- ════ IRON HATCH (floor) ════ -->
+            <g id="svgHatch" filter="url(#shadow)">
+              <!-- Hatch slab -->
+              <rect x="340" y="440" width="220" height="130" fill="#444" rx="5" />
+              <rect x="344" y="444" width="212" height="122" fill="#3a3a3a" rx="4" />
+              <!-- Metal grid pattern -->
+              <line x1="344" y1="484" x2="556" y2="484" stroke="#555" stroke-width="2" />
+              <line x1="344" y1="524" x2="556" y2="524" stroke="#555" stroke-width="2" />
+              <line x1="415" y1="444" x2="415" y2="566" stroke="#555" stroke-width="2" />
+              <line x1="486" y1="444" x2="486" y2="566" stroke="#555" stroke-width="2" />
+              <!-- Combination lock -->
+              <rect x="420" y="470" width="60" height="48" fill="#666" rx="4" />
+              <rect x="423" y="473" width="54" height="42" fill="#555" rx="3" />
+              <text x="450" y="499" text-anchor="middle" font-size="14" fill="#d4a853"
+                font-family="monospace">????</text>
+              <!-- Handle rings -->
+              <circle cx="380" cy="505" r="12" fill="none" stroke="#777" stroke-width="4" />
+              <circle cx="522" cy="505" r="12" fill="none" stroke="#777" stroke-width="4" />
+            </g>
+
+            <!-- Hanging lantern -->
+            <g filter="url(#glow)">
+              <line x1="380" y1="0" x2="380" y2="50" stroke="#7a5a28" stroke-width="3" />
+              <rect x="360" y="50" width="40" height="55" fill="#9a7028" rx="4" />
+              <rect x="365" y="55" width="30" height="45" fill="#ffa020" opacity="0.35" rx="2" />
+              <rect x="362" y="48" width="36" height="4" fill="#b08030" rx="1" />
+            </g>
+
+            <!-- Cobwebs (corner) -->
+            <g opacity="0.6">
+              <line x1="0" y1="0" x2="80" y2="80" stroke="#8a7a6a" stroke-width="0.5" />
+              <line x1="0" y1="20" x2="60" y2="70" stroke="#8a7a6a" stroke-width="0.5" />
+              <line x1="20" y1="0" x2="75" y2="60" stroke="#8a7a6a" stroke-width="0.5" />
+            </g>
+
+            <!-- Vignette -->
+            <radialGradient id="vigC" cx="50%" cy="55%" r="70%">
+              <stop offset="45%" stop-color="transparent" />
+              <stop offset="100%" stop-color="#000" stop-opacity="0.6" />
             </radialGradient>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="4" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="shadow">
-              <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.7"/>
-            </filter>
-            <linearGradient id="wallGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#2d1508"/>
-              <stop offset="30%" stop-color="#3e1e0a"/>
-              <stop offset="60%" stop-color="#4a240c"/>
-              <stop offset="100%" stop-color="#2a1407"/>
-            </linearGradient>
-            <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#4a2a0a"/>
-              <stop offset="60%" stop-color="#2a1404"/>
-              <stop offset="100%" stop-color="#1a0c02"/>
-            </linearGradient>
-            <linearGradient id="shelfGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#3a2010"/>
-              <stop offset="40%" stop-color="#5a3518"/>
-              <stop offset="100%" stop-color="#3a2010"/>
-            </linearGradient>
-            <linearGradient id="doorGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#4a2a0e"/>
-              <stop offset="15%" stop-color="#6a4018"/>
-              <stop offset="50%" stop-color="#7a5020"/>
-              <stop offset="85%" stop-color="#6a4018"/>
-              <stop offset="100%" stop-color="#4a2a0e"/>
-            </linearGradient>
-            <pattern id="floorBoards" patternUnits="userSpaceOnUse" width="80" height="600">
-              <rect width="80" height="600" fill="none"/>
-              <line x1="80" y1="0" x2="80" y2="600" stroke="#1a0c02" stroke-width="2" opacity="0.5"/>
-            </pattern>
-            <pattern id="woodGrain" patternUnits="userSpaceOnUse" width="40" height="200">
-              <rect width="40" height="200" fill="none"/>
-              <line x1="0" y1="0" x2="40" y2="200" stroke="#000" stroke-width="0.5" opacity="0.06"/>
-            </pattern>
-          </defs>
+            <rect width="1000" height="600" fill="url(#vigC)" />
+          </svg>
 
-          <!-- Wall -->
-          <rect width="1000" height="600" fill="url(#wallGrad)"/>
-          <!-- Wood grain on wall -->
-          <rect width="1000" height="600" fill="url(#woodGrain)" opacity="0.5"/>
+          <!-- Clickable hot zones -->
+          <div class="obj" id="obj-barrel" style="left:7%;top:43%;width:16%;height:42%" onclick="interact('barrel')"
+            title="Examine the barrel"></div>
+          <div class="obj" id="obj-toolbox" style="left:57%;top:55%;width:19%;height:32%" onclick="interact('toolbox')"
+            title="Open the toolbox"></div>
+          <div class="obj" id="obj-hatch" style="left:33%;top:70%;width:24%;height:28%" onclick="interact('hatch')"
+            title="Examine the iron hatch"></div>
+          <div class="obj" id="obj-wall-code" style="left:68%;top:12%;width:18%;height:40%"
+            onclick="interact('wall-code')" title="Read the wall writing"></div>
+          <div class="obj back-btn-obj" style="left:0%;top:0%;width:12%;height:11%" onclick="goRoom('study')"
+            title="Go back upstairs"></div>
 
-          <!-- Wainscoting (wall paneling lower third) -->
-          <rect x="0" y="400" width="1000" height="3" fill="#6a4a1a" opacity="0.4"/>
-          <rect x="0" y="403" width="1000" height="170" fill="#1a0c06" opacity="0.3"/>
+          <!-- Room labels -->
+          <div class="room-labels">
+            <span class="rl" style="left:15%;top:88%">Barrel</span>
+            <span class="rl" style="left:67%;top:89%">Toolbox</span>
+            <span class="rl" style="left:45%;top:96%">Iron Hatch</span>
+            <span class="rl" style="left:77%;top:54%">Wall Writing</span>
+            <span class="rl back-label" style="left:6%;top:12%">↑ Back</span>
+          </div>
+        </div>
+      </div><!-- /.room-viewport -->
 
-          <!-- Floor -->
-          <rect x="0" y="430" width="1000" height="170" fill="url(#floorGrad)"/>
-          <rect x="0" y="430" width="1000" height="170" fill="url(#floorBoards)" opacity="0.8"/>
-
-          <!-- Ceiling dark band -->
-          <rect x="0" y="0" width="1000" height="50" fill="#0a0503" opacity="0.8"/>
-
-          <!-- Cornice -->
-          <rect x="0" y="48" width="1000" height="6" fill="#5a3a18" opacity="0.5"/>
-
-          <!-- Lamp glow -->
-          <rect width="1000" height="600" fill="url(#lampGlow)"/>
-          <rect width="1000" height="600" fill="url(#ambLeft)"/>
-
-          <!-- ════ BOOKSHELF (left) ════ -->
-          <g id="svgBookshelf" filter="url(#shadow)">
-            <!-- Main body -->
-            <rect x="20" y="55" width="155" height="375" fill="url(#shelfGrad)" rx="2"/>
-            <rect x="21" y="56" width="153" height="373" fill="none" stroke="#7a4a20" stroke-width="2" rx="1"/>
-            <!-- Shelves horizontal -->
-            <rect x="20" y="145" width="155" height="8" fill="#6a4018"/>
-            <rect x="20" y="235" width="155" height="8" fill="#6a4018"/>
-            <rect x="20" y="325" width="155" height="8" fill="#6a4018"/>
-            <!-- Books on shelves (colorful) -->
-            <!-- shelf 1 books -->
-            <rect x="30" y="65" width="18" height="77" fill="#8b1a1a" rx="1"/>
-            <rect x="50" y="72" width="14" height="70" fill="#1a4a8b" rx="1"/>
-            <rect x="66" y="60" width="20" height="82" fill="#2a7a2a" rx="1"/>
-            <rect x="88" y="68" width="16" height="74" fill="#8b6a1a" rx="1"/>
-            <rect x="106" y="63" width="22" height="79" fill="#6a1a6a" rx="1"/>
-            <rect x="130" y="70" width="15" height="72" fill="#1a6a6a" rx="1"/>
-            <rect x="147" y="65" width="18" height="77" fill="#7a4a1a" rx="1"/>
-            <!-- shelf 2 books -->
-            <rect x="30" y="155" width="15" height="75" fill="#6a1a1a" rx="1"/>
-            <rect x="47" y="160" width="20" height="70" fill="#2a5a8b" rx="1"/>
-            <rect x="69" y="153" width="17" height="77" fill="#1a5a2a" rx="1"/>
-            <rect x="88" y="158" width="14" height="72" fill="#9a7a1a" rx="1"/>
-            <rect x="104" y="155" width="19" height="75" fill="#7a2a7a" rx="1"/>
-            <rect x="125" y="160" width="16" height="70" fill="#2a7a7a" rx="1"/>
-            <rect x="143" y="154" width="21" height="76" fill="#8a5a2a" rx="1"/>
-            <!-- shelf 3 books -->
-            <rect x="30" y="245" width="22" height="74" fill="#9a1a1a" rx="1"/>
-            <rect x="54" y="248" width="15" height="71" fill="#1a3a7a" rx="1"/>
-            <rect x="71" y="244" width="18" height="75" fill="#3a8a3a" rx="1"/>
-            <rect x="91" y="249" width="16" height="70" fill="#7a5a1a" rx="1"/>
-            <rect x="109" y="245" width="20" height="74" fill="#5a1a5a" rx="1"/>
-            <rect x="131" y="247" width="17" height="72" fill="#1a5a5a" rx="1"/>
-            <rect x="150" y="244" width="15" height="75" fill="#6a3a1a" rx="1"/>
-            <!-- Secret compartment (subtle glow hint) -->
-            <rect x="20" y="333" width="155" height="90" fill="#2a1a08" opacity="0.5"/>
-            <rect x="25" y="338" width="145" height="80" fill="none" stroke="rgba(212,168,83,0.1)" stroke-width="1" rx="1"/>
-          </g>
-
-          <!-- ════ PAINTING (upper right) ════ -->
-          <g id="svgPainting" filter="url(#shadow)">
-            <!-- Gold frame -->
-            <rect x="648" y="40" width="145" height="165" fill="#6a4a1a" rx="2"/>
-            <rect x="658" y="50" width="125" height="145" fill="#5a3a12"/>
-            <!-- Painting interior: moonlit graveyard -->
-            <rect x="658" y="50" width="125" height="145" fill="#0e1520"/>
-            <!-- Moon -->
-            <circle cx="720" cy="80" r="18" fill="#d4d0b0" opacity="0.9"/>
-            <circle cx="728" cy="76" r="16" fill="#1a2030" opacity="0.6"/><!-- shadow -->
-            <!-- Clouds -->
-            <ellipse cx="700" cy="70" rx="22" ry="8" fill="#2a3040" opacity="0.7"/>
-            <ellipse cx="740" cy="65" rx="18" ry="7" fill="#2a3040" opacity="0.6"/>
-            <!-- Ground (grass/graves) -->
-            <rect x="658" y="150" width="125" height="45" fill="#0a0f08" opacity="0.8"/>
-            <!-- Gravestones -->
-            <rect x="675" y="130" width="12" height="20" fill="#3a3a3a" rx="2"/>
-            <rect x="679" y="125" width="4" height="8" fill="#3a3a3a"/>
-            <rect x="700" y="125" width="14" height="25" fill="#4a4a4a" rx="2"/>
-            <rect x="725" y="132" width="10" height="18" fill="#3a3a3a" rx="2"/>
-            <!-- Rose bushes (small dots) -->
-            <circle cx="687" cy="152" r="3" fill="#8b0000" opacity="0.8"/>
-            <circle cx="693" cy="150" r="3" fill="#8b0000" opacity="0.8"/>
-            <circle cx="710" cy="153" r="3" fill="#8b0000" opacity="0.8"/>
-            <circle cx="717" cy="151" r="3" fill="#8b0000" opacity="0.8"/>
-            <circle cx="730" cy="152" r="3" fill="#8b0000" opacity="0.8"/>
-            <circle cx="737" cy="150" r="3" fill="#8b0000" opacity="0.8"/>
-            <circle cx="750" cy="153" r="3" fill="#8b0000" opacity="0.8"/>
-            <!-- Raven perched on gravestone -->
-            <ellipse cx="703" cy="120" rx="7" ry="5" fill="#111"/>
-            <ellipse cx="707" cy="118" rx="4" ry="3" fill="#111"/>
-            <!-- Raven eyes -->
-            <circle cx="709" cy="117" r="1.5" fill="#ff3300"/>
-            <!-- Candles in painting (3) -->
-            <rect x="665" y="140" width="4" height="12" fill="#f5f0e0" opacity="0.9"/>
-            <circle cx="667" cy="139" r="2" fill="#ffa020" opacity="0.9" filter="url(#glow)"/>
-            <rect x="760" y="137" width="4" height="15" fill="#f5f0e0" opacity="0.9"/>
-            <circle cx="762" cy="136" r="2" fill="#ffa020" opacity="0.9" filter="url(#glow)"/>
-            <rect x="776" y="142" width="4" height="10" fill="#f5f0e0" opacity="0.9"/>
-            <circle cx="778" cy="141" r="2" fill="#ffa020" opacity="0.9" filter="url(#glow)"/>
-            <!-- Frame decorations -->
-            <rect x="648" y="40" width="145" height="165" fill="none" stroke="#a07830" stroke-width="2" rx="2"/>
-          </g>
-
-          <!-- ════ DESK (center) ════ -->
-          <g id="svgDesk" filter="url(#shadow)">
-            <!-- Desk top surface -->
-            <rect x="355" y="305" width="265" height="18" fill="#8a5520" rx="2"/>
-            <rect x="355" y="322" width="265" height="3" fill="#a07030" opacity="0.6"/>
-            <!-- Desk body -->
-            <rect x="355" y="325" width="265" height="95" fill="#5a3210"/>
-            <!-- Central drawer (locked) -->
-            <rect x="455" y="340" width="80" height="50" fill="#4a2a0e"/>
-            <rect x="456" y="341" width="78" height="48" fill="none" stroke="#7a5020" stroke-width="1.5"/>
-            <!-- Lock on drawer -->
-            <circle cx="495" cy="365" r="6" fill="#888" stroke="#666" stroke-width="1.5"/>
-            <rect x="491" y="368" width="8" height="6" fill="#777" rx="1"/>
-            <!-- Items on desk -->
-            <!-- Candle holder -->
-            <rect x="580" y="295" width="6" height="12" fill="#f0ebe0" opacity="0.95"/>
-            <circle cx="583" cy="294" r="3" fill="#ffc030" filter="url(#glow)"/>
-            <!-- Open journal -->
-            <rect x="390" y="299" width="55" height="8" fill="#d4c9a8" rx="1" opacity="0.9"/>
-            <!-- Ink bottle -->
-            <rect x="450" y="300" width="12" height="7" fill="#1a1a6a" rx="1" opacity="0.9"/>
-            <!-- Desk legs -->
-            <rect x="360" y="420" width="14" height="10" fill="#3a2008"/>
-            <rect x="600" y="420" width="14" height="10" fill="#3a2008"/>
-          </g>
-
-          <!-- ════ SAFE (left wall) ════ -->
-          <g id="svgSafe" filter="url(#shadow)">
-            <rect x="190" y="208" width="130" height="120" fill="#2e2e2e" rx="4"/>
-            <rect x="192" y="210" width="126" height="116" fill="#333" rx="3"/>
-            <!-- Safe door outline -->
-            <rect x="196" y="214" width="118" height="108" fill="#3a3a3a" rx="2"/>
-            <!-- Combination dial -->
-            <circle cx="255" cy="268" r="28" fill="#555" stroke="#777" stroke-width="2"/>
-            <circle cx="255" cy="268" r="22" fill="#444" stroke="#666" stroke-width="1"/>
-            <circle cx="255" cy="268" r="4" fill="#888"/>
-            <!-- Dial markings -->
-            <line x1="255" y1="242" x2="255" y2="248" stroke="#999" stroke-width="2"/>
-            <line x1="255" y1="288" x2="255" y2="294" stroke="#999" stroke-width="2"/>
-            <line x1="229" y1="268" x2="235" y2="268" stroke="#999" stroke-width="2"/>
-            <line x1="275" y1="268" x2="281" y2="268" stroke="#999" stroke-width="2"/>
-            <!-- Engraving above dial -->
-            <text x="255" y="300" text-anchor="middle" font-size="11" fill="#d4a853" opacity="0.8" font-family="serif">🕯️🌹👁️</text>
-            <!-- Handle knob -->
-            <rect x="302" y="250" width="10" height="36" fill="#666" rx="2"/>
-            <rect x="304" y="249" width="6" height="38" fill="#777" rx="1"/>
-          </g>
-
-          <!-- ════ LAMP (right center) ════ -->
-          <g id="svgLamp" filter="url(#glow)">
-            <!-- Lamp glow effect -->
-            <ellipse cx="602" cy="275" rx="55" ry="70" fill="#ff9010" opacity="0.15"/>
-            <!-- Lamp shade -->
-            <path d="M570,250 L635,250 L620,290 L582,290 Z" fill="#c8980a"/>
-            <path d="M570,250 L635,250 L620,290 L582,290 Z" fill="none" stroke="#e8b020" stroke-width="2"/>
-            <!-- Lamp body -->
-            <rect x="597" y="290" width="10" height="55" fill="#8a6a20"/>
-            <!-- Lamp bulb glow (inside shade) -->
-            <ellipse cx="602" cy="265" rx="12" ry="8" fill="#fff9e0" opacity="0.8"/>
-            <!-- Base -->
-            <ellipse cx="602" cy="346" rx="20" ry="6" fill="#7a5a18"/>
-          </g>
-
-          <!-- ════ DOOR (right) ════ -->
-          <g id="svgDoor" filter="url(#shadow)">
-            <!-- Door frame -->
-            <rect x="790" y="65" width="135" height="400" fill="#3a2010" rx="3"/>
-            <!-- Door panel -->
-            <rect x="797" y="70" width="121" height="392" fill="url(#doorGrad)" rx="2"/>
-            <!-- Door panels (decorative) -->
-            <rect x="807" y="85" width="101" height="90" fill="none" stroke="#9a6a28" stroke-width="2" rx="2" opacity="0.6"/>
-            <rect x="807" y="185" width="101" height="100" fill="none" stroke="#9a6a28" stroke-width="2" rx="2" opacity="0.6"/>
-            <rect x="807" y="295" width="101" height="90" fill="none" stroke="#9a6a28" stroke-width="2" rx="2" opacity="0.6"/>
-            <!-- Door knob -->
-            <circle cx="802" cy="275" r="8" fill="#c8a030" stroke="#a08020" stroke-width="1.5"/>
-            <circle cx="802" cy="275" r="4" fill="#e8c040"/>
-            <!-- Lock plate -->
-            <rect x="796" y="267" width="12" height="16" fill="#9a8020" rx="1"/>
-            <ellipse cx="802" cy="278" rx="3" ry="4" fill="#2a2a2a" opacity="0.8"/>
-            <!-- Padlock hanging -->
-            <rect x="797" y="410" width="16" height="12" fill="#888" rx="3"/>
-            <path d="M800,410 Q800,403 805,403 Q810,403 810,410" fill="none" stroke="#888" stroke-width="3"/>
-            <!-- Shadow at base -->
-            <rect x="790" y="460" width="135" height="5" fill="#000" opacity="0.4"/>
-          </g>
-
-          <!-- Final vignette overlay -->
-          <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
-            <stop offset="50%" stop-color="transparent"/>
-            <stop offset="100%" stop-color="#000" stop-opacity="0.5"/>
-          </radialGradient>
-          <rect width="1000" height="600" fill="url(#vignette)"/>
-        </svg>
-
-        <!-- Clickable hot zones (invisible overlays) -->
-        <div class="obj" id="obj-desk"      style="left:36%;top:50%;width:27%;height:30%"  onclick="interact('desk')"      title="Examine the desk"></div>
-        <div class="obj" id="obj-bookshelf" style="left:1%;top:8%;width:17%;height:73%"    onclick="interact('bookshelf')" title="Browse the bookshelf"></div>
-        <div class="obj" id="obj-painting"  style="left:63%;top:5%;width:16%;height:37%"   onclick="interact('painting')"  title="Look at the painting"></div>
-        <div class="obj" id="obj-safe"      style="left:18%;top:33%;width:16%;height:25%"  onclick="interact('safe')"      title="Examine the wall safe"></div>
-        <div class="obj" id="obj-door"      style="left:78%;top:10%;width:16%;height:78%"  onclick="interact('door')"      title="Try the door"></div>
-        <div class="obj" id="obj-lamp"      style="left:56%;top:39%;width:8%;height:30%"   onclick="interact('lamp')"      title="Look at the lamp"></div>
-
-        <!-- Room labels -->
-        <div class="room-labels">
-          <span class="rl" style="left:50%;top:82%">Desk</span>
-          <span class="rl" style="left:9%;top:87%">Bookshelf</span>
-          <span class="rl" style="left:72%;top:44%">Painting</span>
-          <span class="rl" style="left:27%;top:62%">Safe</span>
-          <span class="rl" style="left:86%;top:92%">Door</span>
-          <span class="rl" style="left:61%;top:73%">Lamp</span>
+      <!-- RIGHT SIDEBAR: INVENTORY -->
+      <div class="inv-sidebar" id="inv-sidebar">
+        <div class="inv-sidebar-header">
+          <span class="inv-sidebar-title">ITEMS</span>
+        </div>
+        <div class="inv-sidebar-scroll" id="inv-sidebar-scroll">
+          <div class="inv-sidebar-list" id="inv-sidebar-list">
+            <!-- populated by JS -->
+            <div class="inv-sidebar-empty" id="inv-sidebar-empty">No items yet</div>
+          </div>
+        </div>
+        <!-- selected item info -->
+        <div class="inv-sidebar-footer" id="inv-sidebar-footer" style="display:none">
+          <div class="inv-footer-icon" id="inv-footer-icon"></div>
+          <div class="inv-footer-name" id="inv-footer-name"></div>
+          <div class="inv-footer-desc" id="inv-footer-desc"></div>
+          <button class="inv-deselect-btn" onclick="cancelUse()">✕ Deselect</button>
         </div>
       </div>
-
-      <!-- ROOM 2: THE CELLAR -->
-      <div id="room-cellar" class="room">
-
-        <svg class="room-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="cellarWall" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#0a0808"/>
-              <stop offset="50%" stop-color="#181210"/>
-              <stop offset="100%" stop-color="#0e0804"/>
-            </linearGradient>
-            <linearGradient id="cellarFloor" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#2a1a08"/>
-              <stop offset="100%" stop-color="#0e0804"/>
-            </linearGradient>
-            <radialGradient id="lanternGlow" cx="38%" cy="65%" r="40%">
-              <stop offset="0%" stop-color="#ff9010" stop-opacity="0.3"/>
-              <stop offset="100%" stop-color="#000" stop-opacity="0"/>
-            </radialGradient>
-            <pattern id="stonePat" patternUnits="userSpaceOnUse" width="80" height="50">
-              <rect width="80" height="50" fill="none"/>
-              <rect x="0" y="0" width="79" height="24" fill="none" stroke="#090706" stroke-width="2" rx="1"/>
-              <rect x="40" y="25" width="79" height="24" fill="none" stroke="#090706" stroke-width="2" rx="1"/>
-            </pattern>
-          </defs>
-
-          <!-- Walls -->
-          <rect width="1000" height="600" fill="url(#cellarWall)"/>
-          <rect width="1000" height="430" fill="url(#stonePat)" opacity="0.5"/>
-
-          <!-- Seepage/moisture on wall -->
-          <rect x="200" y="50" width="15" height="120" fill="#0a1510" opacity="0.4" rx="8"/>
-          <rect x="700" y="80" width="10" height="90" fill="#0a1510" opacity="0.3" rx="5"/>
-
-          <!-- Floor -->
-          <rect x="0" y="430" width="1000" height="170" fill="url(#cellarFloor)"/>
-          <line x1="0" y1="430" x2="1000" y2="430" stroke="#3a2010" stroke-width="3"/>
-          <rect x="0" y="430" width="1000" height="170" fill="url(#stonePat)" opacity="0.3"/>
-
-          <!-- Ceiling arch -->
-          <path d="M0 0 L0 80 Q500,-30 1000,80 L1000 0 Z" fill="#060404"/>
-
-          <!-- Lantern glow -->
-          <rect width="1000" height="600" fill="url(#lanternGlow)"/>
-
-          <!-- ════ WALL WRITING (upper right) ════ -->
-          <g id="svgWallCode">
-            <rect x="700" y="80" width="160" height="180" fill="#161008" rx="3"/>
-            <rect x="703" y="83" width="154" height="174" fill="none" stroke="#3a2a10" stroke-width="1.5" rx="2"/>
-            <!-- Scratched roman numerals -->
-            <text x="720" y="130" font-size="22" fill="#8a7040" font-family="serif" opacity="0.9">I  VIII</text>
-            <text x="720" y="165" font-size="22" fill="#8a7040" font-family="serif" opacity="0.9">IV  VII</text>
-            <text x="710" y="210" font-size="11" fill="#5a4a30" font-family="monospace" opacity="0.7">= ? ? ? ?</text>
-          </g>
-
-          <!-- ════ BARREL (left) ════ -->
-          <g id="svgBarrel" filter="url(#shadow)">
-            <!-- Main barrel -->
-            <rect x="80" y="270" width="140" height="165" fill="#5a3818" rx="30"/>
-            <!-- Metal bands -->
-            <rect x="80" y="300" width="140" height="10" fill="#7a5a28" rx="2"/>
-            <rect x="80" y="350" width="140" height="10" fill="#7a5a28" rx="2"/>
-            <rect x="80" y="400" width="140" height="10" fill="#7a5a28" rx="2"/>
-            <!-- Barrel top -->
-            <ellipse cx="150" cy="275" rx="70" ry="12" fill="#6a4a20"/>
-            <ellipse cx="150" cy="272" rx="60" ry="9" fill="#4a3010"/>
-            <!-- Bung -->
-            <circle cx="150" cy="272" r="8" fill="#3a2a10" stroke="#5a3a18" stroke-width="1.5"/>
-          </g>
-
-          <!-- ════ TOOLBOX (right center) ════ -->
-          <g id="svgToolbox" filter="url(#shadow)">
-            <rect x="588" y="360" width="170" height="75" fill="#6a4018" rx="3"/>
-            <!-- Lid -->
-            <rect x="588" y="355" width="170" height="20" fill="#8a5a20" rx="3"/>
-            <!-- Latch -->
-            <rect x="660" y="357" width="26" height="10" fill="#aaa" rx="2"/>
-            <rect x="666" y="356" width="14" height="12" fill="none" stroke="#999" stroke-width="1.5"/>
-            <!-- Handle -->
-            <path d="M640,360 Q673,345 706,360" fill="none" stroke="#9a7030" stroke-width="4" stroke-linecap="round"/>
-            <!-- Tools visible in open crack -->
-            <rect x="600" y="363" width="8" height="14" fill="#888" rx="1"/>
-            <rect x="614" y="360" width="6" height="17" fill="#666" rx="1"/>
-            <rect x="625" y="364" width="10" height="12" fill="#c8780a" rx="1"/>
-          </g>
-
-          <!-- ════ IRON HATCH (floor) ════ -->
-          <g id="svgHatch" filter="url(#shadow)">
-            <!-- Hatch slab -->
-            <rect x="340" y="440" width="220" height="130" fill="#444" rx="5"/>
-            <rect x="344" y="444" width="212" height="122" fill="#3a3a3a" rx="4"/>
-            <!-- Metal grid pattern -->
-            <line x1="344" y1="484" x2="556" y2="484" stroke="#555" stroke-width="2"/>
-            <line x1="344" y1="524" x2="556" y2="524" stroke="#555" stroke-width="2"/>
-            <line x1="415" y1="444" x2="415" y2="566" stroke="#555" stroke-width="2"/>
-            <line x1="486" y1="444" x2="486" y2="566" stroke="#555" stroke-width="2"/>
-            <!-- Combination lock -->
-            <rect x="420" y="470" width="60" height="48" fill="#666" rx="4"/>
-            <rect x="423" y="473" width="54" height="42" fill="#555" rx="3"/>
-            <text x="450" y="499" text-anchor="middle" font-size="14" fill="#d4a853" font-family="monospace">????</text>
-            <!-- Handle rings -->
-            <circle cx="380" cy="505" r="12" fill="none" stroke="#777" stroke-width="4"/>
-            <circle cx="522" cy="505" r="12" fill="none" stroke="#777" stroke-width="4"/>
-          </g>
-
-          <!-- Hanging lantern -->
-          <g filter="url(#glow)">
-            <line x1="380" y1="0" x2="380" y2="50" stroke="#7a5a28" stroke-width="3"/>
-            <rect x="360" y="50" width="40" height="55" fill="#9a7028" rx="4"/>
-            <rect x="365" y="55" width="30" height="45" fill="#ffa020" opacity="0.35" rx="2"/>
-            <rect x="362" y="48" width="36" height="4" fill="#b08030" rx="1"/>
-          </g>
-
-          <!-- Cobwebs (corner) -->
-          <g opacity="0.6">
-            <line x1="0" y1="0" x2="80" y2="80" stroke="#8a7a6a" stroke-width="0.5"/>
-            <line x1="0" y1="20" x2="60" y2="70" stroke="#8a7a6a" stroke-width="0.5"/>
-            <line x1="20" y1="0" x2="75" y2="60" stroke="#8a7a6a" stroke-width="0.5"/>
-          </g>
-
-          <!-- Vignette -->
-          <radialGradient id="vigC" cx="50%" cy="55%" r="70%">
-            <stop offset="45%" stop-color="transparent"/>
-            <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
-          </radialGradient>
-          <rect width="1000" height="600" fill="url(#vigC)"/>
-        </svg>
-
-        <!-- Clickable hot zones -->
-        <div class="obj" id="obj-barrel"   style="left:7%;top:43%;width:16%;height:42%"  onclick="interact('barrel')"   title="Examine the barrel"></div>
-        <div class="obj" id="obj-toolbox"  style="left:57%;top:55%;width:19%;height:32%" onclick="interact('toolbox')"  title="Open the toolbox"></div>
-        <div class="obj" id="obj-hatch"    style="left:33%;top:70%;width:24%;height:28%" onclick="interact('hatch')"    title="Examine the iron hatch"></div>
-        <div class="obj" id="obj-wall-code" style="left:68%;top:12%;width:18%;height:40%" onclick="interact('wall-code')" title="Read the wall writing"></div>
-        <div class="obj back-btn-obj"      style="left:0%;top:0%;width:12%;height:11%"   onclick="goRoom('study')"      title="Go back upstairs"></div>
-
-        <!-- Room labels -->
-        <div class="room-labels">
-          <span class="rl" style="left:15%;top:88%">Barrel</span>
-          <span class="rl" style="left:67%;top:89%">Toolbox</span>
-          <span class="rl" style="left:45%;top:96%">Iron Hatch</span>
-          <span class="rl" style="left:77%;top:54%">Wall Writing</span>
-          <span class="rl back-label" style="left:6%;top:12%">↑ Back</span>
-        </div>
-      </div>
-    </div><!-- /.room-viewport -->
-
-    <!-- RIGHT SIDEBAR: INVENTORY -->
-    <div class="inv-sidebar" id="inv-sidebar">
-      <div class="inv-sidebar-header">
-        <span class="inv-sidebar-title">ITEMS</span>
-      </div>
-      <div class="inv-sidebar-scroll" id="inv-sidebar-scroll">
-        <div class="inv-sidebar-list" id="inv-sidebar-list">
-          <!-- populated by JS -->
-          <div class="inv-sidebar-empty" id="inv-sidebar-empty">No items yet</div>
-        </div>
-      </div>
-      <!-- selected item info -->
-      <div class="inv-sidebar-footer" id="inv-sidebar-footer" style="display:none">
-        <div class="inv-footer-icon" id="inv-footer-icon"></div>
-        <div class="inv-footer-name" id="inv-footer-name"></div>
-        <div class="inv-footer-desc" id="inv-footer-desc"></div>
-        <button class="inv-deselect-btn" onclick="cancelUse()">✕ Deselect</button>
-      </div>
-    </div>
 
     </div><!-- /.game-body -->
 
@@ -555,11 +594,12 @@
     <div class="result-content lose">
       <div class="result-icon">💀</div>
       <h1>TIME'S UP</h1>
-      <p>The clock struck midnight.<br/>The room has claimed another soul...</p>
+      <p>The clock struck midnight.<br />The room has claimed another soul...</p>
       <button class="btn-primary" onclick="resetGame()">🔄 Try Again</button>
     </div>
   </div>
 
   <script src="game.js"></script>
 </body>
+
 </html>
