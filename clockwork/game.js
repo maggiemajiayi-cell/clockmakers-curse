@@ -1,5 +1,5 @@
 /* =============================================
-   THE CLOCKMAKER'S CURSE — GAME ENGINE
+   THE THIRTEENTH CHIME — GAME ENGINE
    Framework skeleton; puzzles to be filled in.
    ============================================= */
 
@@ -349,5 +349,5 @@ document.addEventListener('keydown', e => {
 });
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
-console.log('%c⚙ THE CLOCKMAKER\'S CURSE', 'color:#c8900a;font-size:22px;font-weight:bold;font-family:serif;');
+console.log('%c⚙ THE THIRTEENTH CHIME', 'color:#c8900a;font-size:22px;font-weight:bold;font-family:serif;');
 console.log('%cFramework loaded. Puzzles incoming.', 'color:#8a5f06;font-family:serif;');
